@@ -96,7 +96,7 @@ export interface AISummary {
 export interface AIDraft {
   emailId: string;
   drafts: {
-    tone: 'professional' | 'casual' | 'concise';
+    tone: 'positive' | 'negative';
     body: string;
   }[];
   generatedAt: string;

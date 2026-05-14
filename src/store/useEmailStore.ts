@@ -1,8 +1,9 @@
 import { create } from 'zustand';
 import { Email, EmailAccount, EmailLabel, EmailFolder, AISummary, AIDraft } from '@/lib/types';
-import { DemoProvider, demoAccounts, demoLabels } from '@/lib/providers/demo';
+import { dbProvider } from '@/lib/providers/db-provider';
+import { demoAccounts, demoLabels } from '@/lib/providers/demo';
 
-const provider = new DemoProvider();
+const provider = dbProvider;
 
 interface EmailState {
   emails: Email[];
@@ -179,9 +180,16 @@ export const useEmailStore = create<EmailState>((set, get) => ({
         aiDrafts: {
           emailId: email.id,
           drafts: [
-            { tone: 'professional', body: `Dear ${email.from.name},\n\nThank you for your email. I've reviewed the details and will follow up with my thoughts shortly.\n\nBest regards,\nAlex` },
-            { tone: 'casual', body: `Hey ${email.from.name}!\n\nThanks for sending this over. Looks great — let me take a closer look and get back to you.\n\nCheers!` },
-            { tone: 'concise', body: `Hi ${email.from.name},\n\nReceived, thanks. Will review and respond by EOD.\n\nAlex` },
+            { tone: 'positive', body: `Hi ${email.from.name},\n\nThank you for reaching out! Yes, we can definitely move forward with this. Let me know the next steps.\n\nBest,\nAlex` },
+            { tone: 'positive', body: `Dear ${email.from.name},\n\nThis sounds great. I fully approve and look forward to seeing the results.\n\nBest regards,\nAlex` },
+            { tone: 'positive', body: `Hello ${email.from.name},\n\nI agree with your proposal. Let's proceed as planned.\n\nThanks,\nAlex` },
+            { tone: 'positive', body: `Hi ${email.from.name},\n\nThanks for the update. Everything looks perfectly aligned with our goals.\n\nCheers,\nAlex` },
+            { tone: 'positive', body: `Dear ${email.from.name},\n\nI'm very happy with this direction. You have my full support.\n\nAlex` },
+            { tone: 'negative', body: `Hi ${email.from.name},\n\nThanks for reaching out. Unfortunately, we cannot proceed with this at the moment due to other priorities.\n\nBest,\nAlex` },
+            { tone: 'negative', body: `Dear ${email.from.name},\n\nI have reviewed the proposal and it does not align with our current strategy. We will have to pass.\n\nRegards,\nAlex` },
+            { tone: 'negative', body: `Hello ${email.from.name},\n\nI disagree with this approach. We need to rethink the strategy entirely.\n\nThanks,\nAlex` },
+            { tone: 'negative', body: `Hi ${email.from.name},\n\nThere are several issues with this document. Please hold off on any action until we discuss further.\n\nAlex` },
+            { tone: 'negative', body: `Dear ${email.from.name},\n\nWe cannot approve this request at this time. Let's regroup next quarter.\n\nBest,\nAlex` },
           ],
           generatedAt: new Date().toISOString(),
         },

@@ -5,7 +5,7 @@ import { useEmailStore } from '@/store/useEmailStore';
 export default function EmailDetail() {
   const {
     selectedEmail, selectEmail, openCompose, archiveEmail, deleteEmail,
-    toggleStar, aiSummary, aiDrafts, aiLoading, generateSummary, generateDrafts,
+    toggleStar, aiSummary, aiDrafts, aiLoading, generateSummary, generateDrafts, sendEmail,
   } = useEmailStore();
   const [aiTab, setAiTab] = useState<'summary' | 'drafts'>('summary');
 
@@ -132,13 +132,25 @@ export default function EmailDetail() {
                 </button>
               )
             ) : aiDrafts ? (
-              <div>
-                {aiDrafts.drafts.map((d, i) => (
-                  <div key={i} className="ai-draft-card" onClick={() => openCompose('reply', email)}>
-                    <div className="ai-draft-tone">{d.tone}</div>
-                    <div className="ai-draft-body">{d.body}</div>
-                  </div>
-                ))}
+              <div style={{ display: 'flex', gap: '16px' }}>
+                <div style={{ flex: 1 }}>
+                  <h4 style={{ color: 'var(--success)', marginBottom: '10px', fontSize: '13px' }}>Positive Responses</h4>
+                  {aiDrafts.drafts.filter(d => d.tone === 'positive').map((d, i) => (
+                    <div key={i} className="ai-draft-card" onClick={() => sendEmail(email.from.email, `Re: ${email.subject}`, d.body)}>
+                      <div className="ai-draft-body">{d.body}</div>
+                      <div style={{ fontSize: 11, color: 'var(--text-tertiary)', marginTop: 8, textAlign: 'right' }}>Click to Send</div>
+                    </div>
+                  ))}
+                </div>
+                <div style={{ flex: 1 }}>
+                  <h4 style={{ color: 'var(--danger)', marginBottom: '10px', fontSize: '13px' }}>Negative Responses</h4>
+                  {aiDrafts.drafts.filter(d => d.tone === 'negative').map((d, i) => (
+                    <div key={i} className="ai-draft-card" onClick={() => sendEmail(email.from.email, `Re: ${email.subject}`, d.body)}>
+                      <div className="ai-draft-body">{d.body}</div>
+                      <div style={{ fontSize: 11, color: 'var(--text-tertiary)', marginTop: 8, textAlign: 'right' }}>Click to Send</div>
+                    </div>
+                  ))}
+                </div>
               </div>
             ) : (
               <button className="action-btn" onClick={() => generateDrafts(email)} style={{ width: '100%', justifyContent: 'center' }}>
