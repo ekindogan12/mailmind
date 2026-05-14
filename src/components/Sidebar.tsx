@@ -89,20 +89,16 @@ export default function Sidebar() {
         <button
           className="action-btn"
           style={{ width: '100%', justifyContent: 'center', fontSize: 12 }}
-          onClick={async () => {
-            const res = await fetch('/api/webhooks/inbound', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({
-                from: 'Demo User <demo@example.com>',
-                to: 'gelen-kutu@mailmind.app',
-                subject: 'Test Inbound Webhook Email',
-                text: 'Hello! This is a test email sent via the new inbound webhook architecture. Can you review the attached documents by tomorrow?',
-              }),
+          onClick={() => {
+            const { provider } = require('@/store/useEmailStore');
+            provider.simulateIncoming({
+              from: { name: 'Demo User', email: 'demo@example.com' },
+              to: [{ name: 'Inbox', email: 'gelen-kutu@mailmind.app' }],
+              subject: 'Test Inbound Webhook Email',
+              snippet: 'Hello! This is a test email sent via the new inbound webhook architecture...',
+              body: 'Hello! This is a test email sent via the new inbound webhook architecture. Can you review the attached documents by tomorrow?',
             });
-            if (res.ok) {
-              window.location.reload(); // Refresh to fetch the new email from DB
-            }
+            window.location.reload();
           }}
         >
           Simulate Incoming Email

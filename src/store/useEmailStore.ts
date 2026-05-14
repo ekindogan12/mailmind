@@ -1,8 +1,9 @@
 import { create } from 'zustand';
 import { Email, EmailAccount, EmailLabel, EmailFolder, AISummary, AIDraft } from '@/lib/types';
-import { DemoProvider, demoAccounts, demoLabels } from '@/lib/providers/demo';
+import { localStorageProvider } from '@/lib/providers/localstorage-provider';
+import { demoAccounts, demoLabels } from '@/lib/providers/demo';
 
-const provider = new DemoProvider();
+export const provider = localStorageProvider;
 
 interface EmailState {
   emails: Email[];
