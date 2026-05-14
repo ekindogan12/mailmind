@@ -1,9 +1,6 @@
-import { PrismaClient } from '@prisma/client';
+// Database connection placeholder.
+// In production with a real database, this file will export
+// a properly configured Prisma or Drizzle client.
+// For demo mode, the app uses DemoProvider and doesn't need a DB.
 
-const globalForPrisma = globalThis as unknown as {
-  prisma: PrismaClient | undefined;
-};
-
-export const db = globalForPrisma.prisma ?? new PrismaClient({});
-
-if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = db;
+export const db = null;
