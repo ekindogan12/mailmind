@@ -85,6 +85,29 @@ export default function Sidebar() {
           </div>
         ))}
       </div>
+      <div style={{ padding: '16px', borderTop: '1px solid var(--border)' }}>
+        <button
+          className="action-btn"
+          style={{ width: '100%', justifyContent: 'center', fontSize: 12 }}
+          onClick={async () => {
+            const res = await fetch('/api/webhooks/inbound', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                from: 'Demo User <demo@example.com>',
+                to: 'gelen-kutu@mailmind.app',
+                subject: 'Test Inbound Webhook Email',
+                text: 'Hello! This is a test email sent via the new inbound webhook architecture. Can you review the attached documents by tomorrow?',
+              }),
+            });
+            if (res.ok) {
+              window.location.reload(); // Refresh to fetch the new email from DB
+            }
+          }}
+        >
+          Simulate Incoming Email
+        </button>
+      </div>
     </aside>
   );
 }
