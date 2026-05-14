@@ -138,6 +138,7 @@ export const useEmailStore = create<EmailState>((set, get) => ({
       subject,
       body,
     });
+    get().fetchEmails();
     get().closeCompose();
   },
 

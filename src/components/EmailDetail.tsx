@@ -136,7 +136,10 @@ export default function EmailDetail() {
                 <div style={{ flex: 1 }}>
                   <h4 style={{ color: 'var(--success)', marginBottom: '10px', fontSize: '13px' }}>Positive Responses</h4>
                   {aiDrafts.drafts.filter(d => d.tone === 'positive').map((d, i) => (
-                    <div key={i} className="ai-draft-card" onClick={() => sendEmail(email.from.email, `Re: ${email.subject}`, d.body)}>
+                    <div key={i} className="ai-draft-card" onClick={() => {
+                      sendEmail(email.from.email, `Re: ${email.subject}`, d.body);
+                      alert('Positive response sent successfully! You can see it in your Sent folder.');
+                    }}>
                       <div className="ai-draft-body">{d.body}</div>
                       <div style={{ fontSize: 11, color: 'var(--text-tertiary)', marginTop: 8, textAlign: 'right' }}>Click to Send</div>
                     </div>
@@ -145,7 +148,10 @@ export default function EmailDetail() {
                 <div style={{ flex: 1 }}>
                   <h4 style={{ color: 'var(--danger)', marginBottom: '10px', fontSize: '13px' }}>Negative Responses</h4>
                   {aiDrafts.drafts.filter(d => d.tone === 'negative').map((d, i) => (
-                    <div key={i} className="ai-draft-card" onClick={() => sendEmail(email.from.email, `Re: ${email.subject}`, d.body)}>
+                    <div key={i} className="ai-draft-card" onClick={() => {
+                      sendEmail(email.from.email, `Re: ${email.subject}`, d.body);
+                      alert('Negative response sent successfully! You can see it in your Sent folder.');
+                    }}>
                       <div className="ai-draft-body">{d.body}</div>
                       <div style={{ fontSize: 11, color: 'var(--text-tertiary)', marginTop: 8, textAlign: 'right' }}>Click to Send</div>
                     </div>
