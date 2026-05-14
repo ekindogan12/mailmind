@@ -5,6 +5,7 @@ import Sidebar from '@/components/Sidebar';
 import EmailList from '@/components/EmailList';
 import EmailDetail from '@/components/EmailDetail';
 import ComposeModal from '@/components/ComposeModal';
+import ToastNotification from '@/components/ToastNotification';
 
 export default function Home() {
   const { selectedEmail, isSidebarOpen, isComposeOpen, toggleSidebar, fetchEmails } = useEmailStore();
@@ -31,6 +32,7 @@ export default function Home() {
         </div>
       </div>
       {isComposeOpen && <ComposeModal />}
+      <ToastNotification />
     </div>
   );
 }

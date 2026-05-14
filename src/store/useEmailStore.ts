@@ -21,6 +21,8 @@ interface EmailState {
   aiSummary: AISummary | null;
   aiDrafts: AIDraft | null;
   aiLoading: boolean;
+  toast: { message: string, type: 'success' | 'error' } | null;
+  setToast: (toast: { message: string, type: 'success' | 'error' } | null) => void;
   fetchEmails: () => Promise<void>;
   selectEmail: (email: Email | null) => void;
   setFolder: (folder: EmailFolder) => void;
@@ -55,6 +57,16 @@ export const useEmailStore = create<EmailState>((set, get) => ({
   aiSummary: null,
   aiDrafts: null,
   aiLoading: false,
+  toast: null,
+
+  setToast: (toast) => {
+    set({ toast });
+    if (toast) {
+      setTimeout(() => {
+        if (get().toast?.message === toast.message) set({ toast: null });
+      }, 4000);
+    }
+  },
 
   fetchEmails: async () => {
     set({ isLoading: true });
@@ -133,13 +145,18 @@ export const useEmailStore = create<EmailState>((set, get) => ({
   },
 
   sendEmail: async (to, subject, body) => {
-    await provider.sendMessage({
-      to: [{ name: to, email: to }],
-      subject,
-      body,
-    });
-    get().fetchEmails();
-    get().closeCompose();
+    try {
+      await provider.sendMessage({
+        to: [{ name: to, email: to }],
+        subject,
+        body,
+      });
+      get().fetchEmails();
+      get().closeCompose();
+      get().setToast({ message: 'Mail başarıyla gönderildi', type: 'success' });
+    } catch (error) {
+      get().setToast({ message: 'İleti gönderilemedi', type: 'error' });
+    }
   },
 
   generateSummary: async (email) => {
