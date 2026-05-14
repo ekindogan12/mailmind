@@ -44,7 +44,7 @@ export default function ComposeModal() {
           <textarea value={body} onChange={e => setBody(e.target.value)} placeholder="Write your message..." id="compose-body" />
         </div>
         <div className="compose-footer">
-          <button className="send-btn" onClick={handleSend} id="compose-send">Send ✉️</button>
+          <button className="send-btn" onClick={handleSend} id="compose-send">Send</button>
           <button className="action-btn" onClick={closeCompose}>Discard</button>
         </div>
       </div>

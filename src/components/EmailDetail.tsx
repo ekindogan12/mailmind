@@ -13,7 +13,7 @@ export default function EmailDetail() {
     return (
       <div className="email-detail-panel">
         <div className="email-detail-empty">
-          <div className="icon">📧</div>
+          <div className="icon"></div>
           <div style={{ fontSize: 16, fontWeight: 500 }}>Select an email to read</div>
           <div style={{ fontSize: 13 }}>Choose from the list on the left</div>
         </div>
@@ -66,10 +66,10 @@ export default function EmailDetail() {
 
         {email.attachments.length > 0 && (
           <div className="detail-attachments">
-            <h4>📎 Attachments ({email.attachments.length})</h4>
+            <h4>Attachments ({email.attachments.length})</h4>
             {email.attachments.map(a => (
               <div key={a.id} className="attachment-chip">
-                📄 {a.name}
+                {a.name}
                 <span style={{ color: 'var(--text-tertiary)', fontSize: 11 }}>
                   {(a.size / 1024 / 1024).toFixed(1)}MB
                 </span>
@@ -79,19 +79,19 @@ export default function EmailDetail() {
         )}
 
         <div className="detail-actions">
-          <button className="action-btn primary" onClick={() => openCompose('reply', email)}>↩ Reply</button>
-          <button className="action-btn" onClick={() => openCompose('forward', email)}>↪ Forward</button>
-          <button className="action-btn" onClick={() => archiveEmail(email.id)}>📦 Archive</button>
+          <button className="action-btn primary" onClick={() => openCompose('reply', email)}>Reply</button>
+          <button className="action-btn" onClick={() => openCompose('forward', email)}>Forward</button>
+          <button className="action-btn" onClick={() => archiveEmail(email.id)}>Archive</button>
           <button className="action-btn" onClick={() => toggleStar(email.id)}>
-            {email.starred ? '★ Unstar' : '☆ Star'}
+            {email.starred ? 'Unstar' : 'Star'}
           </button>
-          <button className="action-btn danger" onClick={() => deleteEmail(email.id)}>🗑 Delete</button>
+          <button className="action-btn danger" onClick={() => deleteEmail(email.id)}>Delete</button>
         </div>
 
         {/* AI Panel */}
         <div className="ai-panel">
           <div className="ai-panel-header">
-            <span className="ai-sparkle">✨</span> AI Assistant
+            AI Assistant
           </div>
           <div className="ai-panel-body">
             <div className="ai-tabs">
@@ -111,7 +111,7 @@ export default function EmailDetail() {
 
             {aiLoading ? (
               <div className="ai-loading">
-                <span className="ai-sparkle">✨</span> AI is thinking...
+                AI is thinking...
               </div>
             ) : aiTab === 'summary' ? (
               aiSummary ? (
@@ -128,7 +128,7 @@ export default function EmailDetail() {
                 </div>
               ) : (
                 <button className="action-btn" onClick={() => generateSummary(email)} style={{ width: '100%', justifyContent: 'center' }}>
-                  ✨ Generate Summary
+                  Generate Summary
                 </button>
               )
             ) : aiDrafts ? (
@@ -142,7 +142,7 @@ export default function EmailDetail() {
               </div>
             ) : (
               <button className="action-btn" onClick={() => generateDrafts(email)} style={{ width: '100%', justifyContent: 'center' }}>
-                ✨ Generate Reply Drafts
+                Generate Reply Drafts
               </button>
             )}
           </div>

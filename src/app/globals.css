@@ -15,7 +15,7 @@
   --accent: #7c5cfc;
   --accent-hover: #9178ff;
   --accent-glow: rgba(124,92,252,0.25);
-  --gradient-accent: linear-gradient(135deg, #7c5cfc, #c084fc, #f472b6);
+  --gradient-accent: var(--accent);
   --priority-urgent: #ef4444;
   --priority-important: #f59e0b;
   --priority-normal: #3b82f6;

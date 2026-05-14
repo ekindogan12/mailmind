@@ -36,7 +36,7 @@ export default function EmailList() {
     <div className="email-list-panel">
       <div className="search-bar">
         <div className="search-input-wrap">
-          <span className="search-icon">🔍</span>
+          <span className="search-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></span>
           <input
             className="search-input"
             placeholder="Search emails..."
@@ -61,7 +61,7 @@ export default function EmailList() {
           ))
         ) : emails.length === 0 ? (
           <div style={{ padding: 40, textAlign: 'center', color: 'var(--text-tertiary)' }}>
-            <div style={{ fontSize: 32, marginBottom: 8 }}>📭</div>
+            <div style={{ fontSize: 32, marginBottom: 8 }}></div>
             <div style={{ fontSize: 13 }}>No emails found</div>
           </div>
         ) : (
@@ -84,7 +84,7 @@ export default function EmailList() {
                 <div className="email-item-snippet">{email.snippet}</div>
                 <div className="email-item-meta">
                   {getPriorityLabel(email)}
-                  {email.attachments.length > 0 && <span className="attachment-indicator">📎</span>}
+                  {email.attachments.length > 0 && <span className="attachment-indicator">Attachment</span>}
                   <button
                     className={`star-btn ${email.starred ? 'starred' : ''}`}
                     onClick={(e) => { e.stopPropagation(); toggleStar(email.id); }}

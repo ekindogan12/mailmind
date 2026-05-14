@@ -2,12 +2,12 @@
 import { useEmailStore } from '@/store/useEmailStore';
 
 const folders = [
-  { id: 'inbox' as const, name: 'Inbox', icon: '📥' },
-  { id: 'starred' as const, name: 'Starred', icon: '⭐' },
-  { id: 'sent' as const, name: 'Sent', icon: '📤' },
-  { id: 'drafts' as const, name: 'Drafts', icon: '📝' },
-  { id: 'archive' as const, name: 'Archive', icon: '📦' },
-  { id: 'trash' as const, name: 'Trash', icon: '🗑️' },
+  { id: 'inbox' as const, name: 'Inbox', icon: '' },
+  { id: 'starred' as const, name: 'Starred', icon: '' },
+  { id: 'sent' as const, name: 'Sent', icon: '' },
+  { id: 'drafts' as const, name: 'Drafts', icon: '' },
+  { id: 'archive' as const, name: 'Archive', icon: '' },
+  { id: 'trash' as const, name: 'Trash', icon: '' },
 ];
 
 export default function Sidebar() {
@@ -27,7 +27,7 @@ export default function Sidebar() {
       </div>
 
       <button className="compose-btn" onClick={() => { openCompose('new'); toggleSidebar(); }}>
-        ✏️ Compose
+        Compose
       </button>
 
       <nav className="sidebar-nav">
