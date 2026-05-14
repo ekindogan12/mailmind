@@ -28,7 +28,7 @@ export default function ComposeModal() {
       <div className="compose-modal">
         <div className="compose-header">
           <span className="compose-title">{title}</span>
-          <button className="close-btn" onClick={closeCompose}>✕</button>
+          <button className="close-btn" onClick={closeCompose}>x</button>
         </div>
         <div className="compose-fields">
           <div className="compose-field">

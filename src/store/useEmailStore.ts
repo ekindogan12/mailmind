@@ -1,9 +1,8 @@
 import { create } from 'zustand';
 import { Email, EmailAccount, EmailLabel, EmailFolder, AISummary, AIDraft } from '@/lib/types';
-import { dbProvider } from '@/lib/providers/db-provider';
-import { demoAccounts, demoLabels } from '@/lib/providers/demo';
+import { DemoProvider, demoAccounts, demoLabels } from '@/lib/providers/demo';
 
-const provider = dbProvider;
+const provider = new DemoProvider();
 
 interface EmailState {
   emails: Email[];
